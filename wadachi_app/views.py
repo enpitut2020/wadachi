@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm
+from .models import Post
 from django.utils import timezone
-
+from django.contrib.auth.decorators import login_required
 
 def post_list(request):
-    return render(request, 'wadachi_app/post_list.html', {})
+    # いろいろ書く
+    # 
+    # データを取り出すクエリをかく
+    posts = Post.objects.all()
+    return render(request, 'wadachi_app/post_list.html', {'posts': posts})
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         # POSTメソッドの時は渡されたデータをPostFormに格納
