@@ -1,0 +1,12 @@
+<html>
+    <head>
+    </head>
+    <body>
+    <h2>New post</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <!-- formの内容をpタグで囲む -->
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    </body>
+</html>

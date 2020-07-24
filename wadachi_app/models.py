@@ -4,14 +4,22 @@ from django.utils import timezone
 
 
 class Post(models.Model):
+    # postを作った人
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    
+    # 資料のtitle
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    # 資料のurl
+    url = models.URLField(max_length=200, default='', null=True)
+
+    # text = models.TextField()
+
+    # データが作成された時刻
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+
+    # published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
-        self.published_date = timezone.now()
         self.save()
 
     def __str__(self):
