@@ -13,6 +13,10 @@ def bridge_list(request):
     bridge = Bridge.objects.all()
     return render(request, 'wadachi_app/bridge_list.html', {'bridges': bridge})
 
+def brick_list(request, pk):
+    bricks = Brick.objects.filter(bridge__pk=pk)
+    return render(request, 'wadachi_app/brick_list.html', {'bricks': bricks})
+
 @login_required
 def brick_new(request):
     if request.method == "POST":

@@ -26,12 +26,15 @@
         <h2>投稿の一覧</h2>
         
         <table border="1">
-            <th>投稿者</th>
             <th>タイトル</th>
-            {% for bridge in bridges %}
+            <th>Author</th>
+            <th>URL</th>
+            
+            {% for brick in bricks %}
                 <tr>
-                    <td>{{ bridge.contributor }}</td>
-                    <td><a href="{% url 'brick_list' pk=bridge.pk %}">{{ bridge.topic }}</a></td>
+                    <td>{{ brick.title }}</td>
+                    <td>{{ brick.author }}</td>
+                    <td><a href="{{ brick.url }}">{{ brick.url }}</a></td>
                 </tr>
             {% endfor %}
         </table>
