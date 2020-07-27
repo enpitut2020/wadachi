@@ -11,9 +11,13 @@ class Bridge(models.Model):
     contributor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 橋のtitle
     topic = models.CharField(max_length=200)
+    # 投稿者の状態・context (必須)
+    context = models.TextField()
+    # 投稿者の目的 (必須)
+    goal = models.TextField()
     # データが作成された時刻
     created_date = models.DateTimeField(default=timezone.now)
-    
+
     def publish(self):
         self.save()
 
@@ -33,6 +37,8 @@ class Brick(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     # 所属するbridge
     bridge = models.ForeignKey(Bridge, on_delete=models.CASCADE)
+    # 振り返り用のフィードバックやメモ
+    memo = models.TextField()
 
     def publish(self):
         self.save()
