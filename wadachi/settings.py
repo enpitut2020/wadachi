@@ -25,7 +25,7 @@ SECRET_KEY = '%)*)$ovl-!$bxf@@_7&#mm#4k4!hu6-g@e+=y=+mm^_z15a_8b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition

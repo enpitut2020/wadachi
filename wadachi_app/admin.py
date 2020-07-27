@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import Post
+from .models import Bridge, Brick
 
-admin.site.register(Post)
+
+admin.site.register(Bridge)
+admin.site.register(Brick)

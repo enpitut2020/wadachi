@@ -3,21 +3,36 @@ from django.db import models
 from django.utils import timezone
 
 
-class Post(models.Model):
+
+
+# 資料をまとめたもの
+class Bridge(models.Model):
     # postを作った人
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
-    # 資料のtitle
-    title = models.CharField(max_length=200)
-    # 資料のurl
-    url = models.URLField(max_length=200, default='', null=True)
-
-    # text = models.TextField()
-
+    contributor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # 橋のtitle
+    topic = models.CharField(max_length=200)
     # データが作成された時刻
     created_date = models.DateTimeField(default=timezone.now)
+    
+    def publish(self):
+        self.save()
 
-    # published_date = models.DateTimeField(blank=True, null=True)
+    def __str__(self):
+        return self.topic
+
+
+# 個別資料のデータ
+class Brick(models.Model):
+    # 資料のtitle (Brickの名前)   例："入門Haskell"
+    title = models.CharField(max_length=200)
+    # 資料の著者                  例："John Smith"
+    author = models.CharField(max_length=200)
+    # 資料のurl                   例：https://amazon.com/入門Haskell
+    url = models.URLField(max_length=200, default='', null=True)
+    # データが作成された時刻
+    created_date = models.DateTimeField(default=timezone.now)
+    # 所属するbridge
+    bridge = models.ForeignKey(Bridge, on_delete=models.CASCADE)
 
     def publish(self):
         self.save()

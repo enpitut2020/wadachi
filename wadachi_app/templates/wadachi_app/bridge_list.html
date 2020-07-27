@@ -1,0 +1,39 @@
+<html lang="ja">
+    <head>
+        <title>Wadachi</title>
+    </head>
+    <body>
+        <div class="page-header">
+            {% if user.is_authenticated %}
+                <a href="{% url 'bridge_new' %}" class="top-menu">投稿を作成</a>
+                <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu">ログイン</a>
+            {% endif %}
+        </div>
+
+        <h1>轍</h1>
+        <p>轍は「マネできるWeb本棚サービス」です。</p>
+        <p>
+        みんなの読書の記録を真似することで、勉強や調べ物に役立てる
+        ことができます。
+        </p>
+
+        <p>
+        また、自分の読書メモとして利用することもできます。
+        </p>
+
+        <h2>投稿の一覧</h2>
+        
+        <table border="1">
+            <th>投稿者</th>
+            <th>タイトル</th>
+            {% for bridge in bridges %}
+                <tr>
+                    <td>{{ bridge.contributor }}</td>
+                    <td><a href="{% url 'brick_list' pk=bridge.pk %}">{{ bridge.topic }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
