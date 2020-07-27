@@ -11,6 +11,10 @@ class Bridge(models.Model):
     contributor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # 橋のtitle
     topic = models.CharField(max_length=200)
+    # 投稿者の状態・context (必須)
+    context = models.TextField()
+    # 投稿者の目的 (必須)
+    goal = models.TextField()
     # データが作成された時刻
     created_date = models.DateTimeField(default=timezone.now)
     

@@ -7,7 +7,7 @@ class BridgeForm(forms.ModelForm):
 
     class Meta:
         model = Bridge
-        fields = ('topic',)
+        fields = ('topic', 'context', 'goal',)
 
 
 class BrickForm(forms.ModelForm):

@@ -15,9 +15,9 @@ def bridge_list(request):
 
 def brick_list(request, pk):
     bricks = Brick.objects.filter(bridge__pk=pk)
-    topic = Bridge.objects.get(id=pk).topic
+    bridge = Bridge.objects.get(id=pk)
     return render(request, 'wadachi_app/brick_list.html',
-            {'bricks': bricks, 'bridgepk': pk, 'bridgetopic': topic})
+            {'bricks': bricks, 'bridge': bridge})
 
 @login_required
 def brick_new(request, pk):
