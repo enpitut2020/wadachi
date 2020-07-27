@@ -15,8 +15,9 @@ def bridge_list(request):
 
 def brick_list(request, pk):
     bricks = Brick.objects.filter(bridge__pk=pk)
+    topic = Bridge.objects.get(id=pk).topic
     return render(request, 'wadachi_app/brick_list.html',
-            {'bricks': bricks, 'bridgepk': pk})
+            {'bricks': bricks, 'bridgepk': pk, 'bridgetopic': topic})
 
 @login_required
 def brick_new(request, pk):
@@ -31,7 +32,7 @@ def brick_new(request, pk):
             brick.bridge = Bridge.objects.get(id=pk)
             brick.save()
             # 登録完了後に行う操作
-            # この場合はpost_list(トップページ)にリダイレクト
+            # この場合はbrick_list(bridgeのページ)にリダイレクト
             return redirect('brick_list', pk=pk)
 
             # return redirect('post_detail', pk=post.pk)
