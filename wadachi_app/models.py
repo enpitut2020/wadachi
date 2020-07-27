@@ -17,7 +17,7 @@ class Bridge(models.Model):
     goal = models.TextField()
     # データが作成された時刻
     created_date = models.DateTimeField(default=timezone.now)
-    
+
     def publish(self):
         self.save()
 
@@ -37,6 +37,8 @@ class Brick(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     # 所属するbridge
     bridge = models.ForeignKey(Bridge, on_delete=models.CASCADE)
+    # 振り返り用のフィードバックやメモ
+    memo = models.TextField()
 
     def publish(self):
         self.save()
