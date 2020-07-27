@@ -9,9 +9,9 @@ class BridgeForm(forms.ModelForm):
         model = Bridge
         fields = ('topic',)
 
-# TODO: BrickFormの作成formを作る
+
 class BrickForm(forms.ModelForm):
     
     class Meta:
         model = Brick
-        fields = ('title', 'author', 'url', 'bridge',)
+        fields = ('title', 'author', 'url',)

@@ -18,25 +18,25 @@ def brick_list(request, pk):
     return render(request, 'wadachi_app/brick_list.html', {'bricks': bricks})
 
 @login_required
-def brick_new(request):
+def brick_new(request, pk):
     if request.method == "POST":
         # POSTメソッドの時は渡されたデータをPostFormに格納
-        form = PostForm(request.POST)
+        form = BrickForm(request.POST)
         if form.is_valid():
             # formに正当なデータが与えられたときの動作
             brick = form.save(commit=False)
             # request.userは正しいか??
-            brick.author = request.user
             brick.published_date = timezone.now()
+            brick.bridge = Bridge.objects.get(id=pk)
             brick.save()
             # 登録完了後に行う操作
             # この場合はpost_list(トップページ)にリダイレクト
-            return redirect('post_list')
+            return redirect('brick_list', pk=pk)
 
             # return redirect('post_detail', pk=post.pk)
     else:
         # GETメソッドの時はカラのformを用意する
-         form = PostForm()
+         form = BrickForm()
          # forms.html 変える必要あり??
     return render(request, 'wadachi_app/forms.html', {'form': form})
 
@@ -44,7 +44,7 @@ def brick_new(request):
 def bridge_new(request):
     if request.method == "POST":
         # POSTメソッドの時は渡されたデータをPostFormに格納
-        form = PostForm(request.POST)
+        form = BridgeForm(request.POST)
         if form.is_valid():
             # formに正当なデータが与えられたときの動作
             bridge = form.save(commit=False)
@@ -58,5 +58,5 @@ def bridge_new(request):
             # return redirect('post_detail', pk=post.pk)
     else:
         # GETメソッドの時はカラのformを用意する
-         form = PostForm()
+        form = BridgeForm()
     return render(request, 'wadachi_app/forms.html', {'form': form})
