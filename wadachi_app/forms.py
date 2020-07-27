@@ -1,9 +1,17 @@
 from django import forms
 
-from .models import Post
+from .models import Bridge, Brick
 
-class PostForm(forms.ModelForm):
+
+class BridgeForm(forms.ModelForm):
 
     class Meta:
-        model = Post
-        fields = ('title', 'url')
+        model = Bridge
+        fields = ('topic',)
+
+# TODO: BrickFormの作成formを作る
+class BrickForm(forms.ModelForm):
+    
+    class Meta:
+        model = Brick
+        fields = ('title', 'author', 'url', 'bridge',)
