@@ -15,3 +15,6 @@ class BrickForm(forms.ModelForm):
     class Meta:
         model = Brick
         fields = ('title', 'author', 'url', 'memo',)
+
+
+
