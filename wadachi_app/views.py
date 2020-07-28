@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import BridgeForm, BrickForm
 from .models import Bridge, Brick
 from django.utils import timezone
-from django.contrib.auth.decorators import login_required
+from .models import Bridge
+
+from django.db.models import Q
+
 
 def post_list(request):
     # posts = Brick.objects.all()
@@ -10,8 +14,18 @@ def post_list(request):
     pass  # 関数の内容がないので一時的に書いてます
 
 def bridge_list(request):
-    bridge = Bridge.objects.all()
-    return render(request, 'wadachi_app/bridge_list.html', {'bridges': bridge})
+    q_word = request.GET.get('query')
+    if q_word:
+        object_list = Bridge.objects.filter(
+            Q(topic__icontains=q_word) |
+            Q(contributor__username__icontains=q_word) |
+            Q(context__icontains=q_word) |
+            Q(goal__icontains=q_word))
+        search_mode = True
+    else:
+        object_list = Bridge.objects.all()
+        search_mode = False
+    return render(request, 'wadachi_app/bridge_list.html', {'bridges': object_list, 'search_mode': search_mode})
 
 def brick_list(request, pk):
     bricks = Brick.objects.filter(bridge__pk=pk)
