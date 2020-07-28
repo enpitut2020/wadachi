@@ -10,6 +10,10 @@
             {% else %}
                 <a href="{% url 'login' %}" class="top-menu">ログイン</a>
             {% endif %}
+            <form class="form-inline" method="GET" action="{% url 'bridge_list' %}">
+                <input class="form-control" type="text" name="query" value="{{ request.GET.query }}" placeholder="検索ワードを入力">
+                <button type="submit" value="search" class="btn btn-info">検索</button>
+            </form>
         </div>
 
         <h1>轍</h1>
@@ -28,6 +32,7 @@
         <table border="1">
             <th>投稿者</th>
             <th>タイトル</th>
+            
             {% for bridge in bridges %}
                 <tr>
                     <td>{{ bridge.contributor }}</td>

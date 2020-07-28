@@ -1,24 +1,21 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import BridgeForm, BrickForm
 from .models import Bridge, Brick
 from django.utils import timezone
 from .models import Bridge
 
-""" 追加 """
-from django.contrib import messages
 from django.db.models import Q
 
+def get_queryset(request):
+    q_word = request.GET.get('query')
+    if q_word:
+        object_list = Bridge.objects.filter(
+            Q(topic__icontains=q_word) | Q(contributor__username__icontains=q_word))
+    else:
+        object_list = Bridge.objects.all()
+    return render(request, 'wadachi_app/bridge_list.html', {'bridges': object_list})
 
-def index(request):
-    blog = Bridge.objects.order_by('-id')
-    """ 検索機能の処理 """
-    keyword = request.GET.get('keyword')
-    if keyword:
-        bridge = bridge.filter(
-                 Q(title__icontains=keyword)
-               )
-        messages.success(request, '「{}」の検索結果'.format(keyword))
-    return render(request, 'blog/index.html', {'bridge': bridge })
 
 
 def post_list(request):
