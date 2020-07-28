@@ -20,7 +20,7 @@
     </div>
     <br>
     <h2>新規ユーザ登録</h2>
-    <p>パスワードは英数字を含めてください。</p>
+    <p>パスワードは英数字を含み, 8文字以上にしてください</p>
     <form action="/registration" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ registration_form }}
