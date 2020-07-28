@@ -19,6 +19,10 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="{% url 'login' %}">ログイン</a>
                 {% endif %}
+                <form class="form-inline" method="GET" action="{% url 'bridge_list' %}">
+                    <input class="form-control" type="text" name="query" value="{{ request.GET.query }}" placeholder="検索ワードを入力">
+                    <button type="submit" value="search" class="btn btn-info">検索</button>
+                </form>
             </div>
         </nav>
        
