@@ -8,8 +8,6 @@ from .models import Bridge
 from django.db.models import Q
 
 
-
-
 def post_list(request):
     # posts = Brick.objects.all()
     # return render(request, 'wadachi_app/post_list.html', {'posts': posts})
