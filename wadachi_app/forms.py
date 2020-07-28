@@ -23,5 +23,10 @@ class BrickForm(forms.ModelForm):
         model = Brick
         fields = ('title', 'author', 'url', 'memo',)
 
+class RegistrationForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField()
+    # email = forms.EmailField()
+
 
 

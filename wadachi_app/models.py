@@ -3,8 +3,6 @@ from django.db import models
 from django.utils import timezone
 
 
-
-
 # 資料をまとめたもの
 class Bridge(models.Model):
     # postを作った人
