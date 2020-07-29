@@ -26,14 +26,14 @@
         </nav>
 
         <div class="content" style="margin: 3em;">
-            <h1>{{ bridge.topic }}<span class="badge badge-secondary" style="margin-left: 1em;">達成</span></h1>
+            <h1 style="text-align: center; margin-right: auto; margin-left: auto">{{ bridge.topic|linebreaksbr }}</h1>
             <div class="card text-white bg-danger mb-3" style="max-width: 40rem; margin-right: auto;
                 margin-left: auto;">
                 <div class="card-header">
                     背景
                 </div>
                 <div class="card-body">
-                    <div class="card-text">{{ bridge.context }}</div>
+                    <div class="card-text">{{ bridge.context|linebreaksbr }}</div>
                 </div>
             </div>
             
@@ -43,25 +43,30 @@
                     目的
                 </div>
                 <div class="card-body">
-                    <div class="card-text">{{ bridge.goal }}</div>
+                    <div class="card-text">{{ bridge.goal|linebreaksbr }}</div>
                 </div>
             </div>
             
             {% for brick in bricks %}
-                <div class="card text-white bg-info mb-3" style="max-width: 40rem; margin-right: auto;
+                <div class="card text-white mb-3" style="max-width: 40rem; margin-right: auto;
                 margin-left: auto;">
-                    <div class="card-header">{{ brick.title }}</div>
+                    <div class="card-header bg-primary">
+                        {{ brick.title }} <span class="text-muted" style="text-align: center; margin-left: 30">{{ brick.author }}</span>
+                    </div>
+                    <!-- <div class="card-header bg-primary text-muted">{{ brick.author }}</div> -->
                     <div class="card-body">
-                        <h5 class="card-title">{{ brick.author }}</h5>
-                        <p class="card-text">{{ brick.memo }}</p>
+                        <p class="card-text text-dark">{{ brick.memo|linebreaksbr }}</p>
                         <a href="{{ brick.url }}">{{ brick.url }}</a>
                     </div>
                 </div>
             {% endfor %}
+
+            {% if user.is_authenticated %}
+            <div class="text-center">
+                <a class="btn btn-primary" style="margin-left: auto; margin-right: auto;" href="{% url 'brick_new' pk=bridge.pk %}">資料を追加</a>
+            </div>
+            {% endif %}
         </div>
-        {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="{% url 'brick_new' pk=bridge.pk %}">資料を追加</a>
-        {% endif %}
     
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
